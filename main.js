@@ -3,6 +3,9 @@ import axios from "axios";
 import fs from "fs";
 import readline from "node:readline";
 
+console.log("GUILTY GEAR -STRIVE- Silli Secondary Picker by SilliEmi!");
+
+// Readline functions for user input
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -15,11 +18,6 @@ const askQuestion = (question) => {
     });
   });
 };
-
-// Testing variables
-const player_char = await askQuestion(
-  "Enter your character's short name (ie: SO for Sol): ",
-);
 
 // Creates new variables in each matchup object that calculates the winrate (with 2 decimal places of accuracy) and returns the resulting JSON
 function process_matchup_winrates(json) {
@@ -34,15 +32,19 @@ function process_matchup_winrates(json) {
   return json;
 }
 
-// Prints the winrate of a given matchup based on the community standard ratio (out of 100, ie 50:50 for an even matchup)
-function get_matchup_ratio(matchup, mult) {
-  //console.log(
-  //  "Matchup ratio: " +
-  //    matchup.winrate * 100 +
-  //    ":" +
-  //    (100 - matchup.winrate * 100),
-  //);
+// Calculate the bonus multiplication to a character's matchup score, relative to how necessary a good matchup is for the player character
+function get_matchup_bonus(matchup, mult) {
   return (((1 - matchup.winrate) * mult) / matchup.winrate) * 10;
+}
+
+// Prints the winrate of a given matchup based on the community standard ratio (out of 100, ie 50:50 for an even matchup)
+function get_matchup_ratio(matchup) {
+  console.log(
+    "Matchup ratio: " +
+      matchup.winrate * 100 +
+      ":" +
+      (100 - matchup.winrate * 100),
+  );
 }
 
 // Parsing the latest matchup and character data from puddle-farm's API
@@ -85,54 +87,95 @@ function compareThirdColumn(a, b) {
 // Scores every character in the game relative to how well they do in the player character's worst matchups, sorting them from best to worst and printing the top 5 picks
 function secondary_picker(player, json) {
   let character = 0;
-  let secondaries = chars;
+  let secondaries = [...chars];
   for (let i in secondaries) {
     secondaries[i][2] = 0;
-  }
-  for (character in chars) {
-    if (chars[character][0] == player) {
-      break;
-    }
   }
   for (let i in secondaries) {
     let cur_char = secondaries[i][0];
 
     for (let j in chars) {
       if (
-        chars[j][0] != secondaries[i][0] &&
-        search_char_matchup(player, chars[j][0], json).winrate <= 0.5
+        chars[j][0] != cur_char &&
+        search_char_matchup(player, chars[j][0], json).winrate <= 0.5 &&
+        search_char_matchup(secondaries[i][0], chars[j][0], json).winrate >= 0.5
       ) {
         secondaries[i][2] += Math.floor(
           search_char_matchup(secondaries[i][0], chars[j][0], json).winrate *
             100 *
-            get_matchup_ratio(
+            get_matchup_bonus(
               search_char_matchup(player, chars[j][0], json),
               10,
             ),
         );
       }
     }
-    if (cur_char == player) delete secondaries[i];
+    //if (cur_char == player) delete secondaries[i];
+    let overall_winrate = 0;
+    //console.log(json[i]["matchups"]);
+    for (let matchup in json[i]["matchups"]) {
+      overall_winrate +=
+        json[i]["matchups"][matchup].wins /
+        json[i]["matchups"][matchup].total_games;
+    }
+    overall_winrate /= chars.length;
+    secondaries[i][2] /= overall_winrate;
+    secondaries[i][2] = Math.floor(secondaries[i][2]);
   }
   secondaries.sort(compareThirdColumn);
-  console.log(secondaries);
-  console.log(
-    "Your best character pickups are " +
-      secondaries[0][1] +
+
+  return secondaries;
+}
+
+// Code for outputting a full JSON list
+/*const best_secondaries = [];
+for (let i in chars) {
+  let char_secs = secondary_picker(chars[i][0], matchups_vanq);
+  console.log(char_secs[0][2])
+  best_secondaries.push(
+    "- " +
+      chars[i][1] +
+      ": " +
+      char_secs[0][1] +
       ", " +
-      secondaries[1][1] +
+      char_secs[1][1] +
       ", " +
-      secondaries[2][1] +
+      char_secs[2][1] +
       ", " +
-      secondaries[3][1] +
-      " and " +
-      secondaries[4][1] +
-      "!",
+      char_secs[3][1] +
+      ", " +
+      char_secs[4][1]
   );
 }
 
+fs.writeFile("output.json", JSON.stringify(best_secondaries), "utf8", (err) => {
+  if (err) {
+    console.error("Error writing file:", err);
+    return;
+  }
+  console.log("File written successfully!");
+});*/
+
+// The user inputs the two-character short name for their main character
+const player_char = await askQuestion(
+  "Enter your character's short name (ie: SO for Sol): ",
+);
+
+// Prints out the 5 best secondary picks using aforeseen functions
 try {
-  secondary_picker(player_char, matchups_vanq);
+  let char_secs = secondary_picker(player_char, matchups_vanq);
+  console.log(
+    "Your best secondary picks are " +
+      char_secs[0][1] +
+      ", " +
+      char_secs[1][1] +
+      ", " +
+      char_secs[2][1] +
+      ", " +
+      char_secs[3][1] +
+      " and " +
+      char_secs[4][1],
+  );
 } catch (_err) {
   console.log(_err);
 }
