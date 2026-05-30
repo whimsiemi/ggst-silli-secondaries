@@ -1,0 +1,16 @@
+{
+  "name": "ggst-silli-secondaries",
+  "version": "1.0.0",
+  "description": "A secondary picker for GUILTY GEAR -STRIVE-, now with zero vibe coding!",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.16.1"
+  }
+}
