@@ -1,3 +1,5 @@
+// /characters ("Sends each character's short name, used by puddle-farm and this bot!")
+
 const {
   SlashCommandBuilder,
   TextDisplayBuilder,
@@ -12,7 +14,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("characters")
     .setDescription(
-      "Sends each character's short name, used by puddle-farm and this bot",
+      "Sends each character's short name, used by puddle-farm and this bot!",
     ),
   async execute(interaction) {
     const charsHeaders = new TextDisplayBuilder().setContent(

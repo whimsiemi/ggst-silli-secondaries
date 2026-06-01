@@ -1,3 +1,5 @@
+// /fetch ("Refreshes the puddle-farm API datasets! (ADMIN ONLY)")
+
 const { SlashCommandBuilder, MessageFlags } = require("discord.js");
 const axios = require("axios");
 const fs = require("fs");

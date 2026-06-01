@@ -48,7 +48,7 @@ function compareThirdColumn(a, b) {
   }
 }
 
-// Scores every character in the game relative to how well they do in the player character's worst matchups, sorting them from best to worst and printing the top 5 picks
+// Scores every character in the game relative to how well they do in the player character's worst matchups, sorting them from best to worst and returning the full list
 function secondary_picker(player, dataset) {
   let json = matchups_all;
   switch (dataset) {

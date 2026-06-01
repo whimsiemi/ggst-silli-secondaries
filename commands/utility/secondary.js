@@ -1,3 +1,5 @@
+// /secondary [main] [dataset] [size] ("Outputs the best picks for a secondary character, based on the provided matchup datasets!")
+
 const {
   SlashCommandBuilder,
   TextDisplayBuilder,

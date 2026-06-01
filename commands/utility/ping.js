@@ -1,3 +1,5 @@
+// /ping ("Replies with Pong!")
+
 const { SlashCommandBuilder, MessageFlags } = require("discord.js");
 
 module.exports = {

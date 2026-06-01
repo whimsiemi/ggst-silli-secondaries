@@ -1,3 +1,5 @@
+// Necessary first-time installation script to fetch the required matchup data. In the future, I'll just make the index.js script do this script's job
+
 const { SlashCommandBuilder, MessageFlags } = require("discord.js");
 const axios = require("axios");
 const fs = require("fs");
