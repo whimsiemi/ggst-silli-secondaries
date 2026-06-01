@@ -1,5 +1,5 @@
-# ggst-silli-secondaries
-A secondary picker for GUILTY GEAR -STRIVE-, now with zero vibe coding!
+# -STRIVE- Silli Secondary Picker
+A mathematical secondary picker for GUILTY GEAR -STRIVE-, now with zero vibe coding!
 
 ## Hosting a fork of this bot
 1. Create a `config.json` file in the root directory
