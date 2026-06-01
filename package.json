@@ -1,9 +1,9 @@
 {
-  "name": "ggst-silli-secondaries",
+  "name": "silli-secondaries-discord",
   "version": "1.0.0",
-  "description": "A secondary picker for GUILTY GEAR -STRIVE-, now with zero vibe coding!",
-  "main": "main.js",
-  "type": "module",
+  "description": "Silli Secondaries, now ported to Discord as a bot!",
+  "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.16.1"
+    "axios": "^1.16.1",
+    "discord.js": "^14.26.4",
+    "fs": "^0.0.1-security"
   }
 }
