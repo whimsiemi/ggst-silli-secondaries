@@ -6,7 +6,7 @@ const {
   MessageFlags,
 } = require("discord.js");
 const path = require("path");
-const chars = require(path.join(process.cwd(), "/datasets/chars.json"));
+const chars = require(path.join(process.cwd(), "/datasets/chars/chars.json"));
 
 module.exports = {
   data: new SlashCommandBuilder()
