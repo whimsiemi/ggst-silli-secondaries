@@ -101,7 +101,7 @@ module.exports = {
           break;
       }
       let secs_grammar = "";
-      switch (char_secs.length) {
+      switch (interaction.options.getInteger("size")) {
         case 1:
           secs_grammar = "**Here is the best secondary for ";
           break;
