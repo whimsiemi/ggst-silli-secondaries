@@ -81,6 +81,7 @@ module.exports = {
         interaction.options.getInteger("dataset"),
       );
       for (let i in char_secs) {
+        char_secs[i][3] = "1510807701368737932";
         for (let j in emojis) {
           if (emojis[j][0] == char_secs[i][0]) {
             char_secs[i][3] = emojis[j][1];
