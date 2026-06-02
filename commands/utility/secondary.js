@@ -100,25 +100,15 @@ module.exports = {
           dataset_name = "chosen";
           break;
       }
-      if (char_secs.length > 1) {
-        const secsHeaders = new TextDisplayBuilder().setContent(
-          "**Here are the " +
-            interaction.options.getInteger("size") +
-            " best secondaries for " +
-            player_main +
-            ", based on the " +
-            dataset_name +
-            " dataset:**",
-        );
-      } else {
-        const secsHeaders = new TextDisplayBuilder().setContent(
-          "**Here is the best secondary for " +
-            player_main +
-            ", based on the " +
-            dataset_name +
-            " dataset:**",
-        );
-      }
+      const secsHeaders = new TextDisplayBuilder().setContent(
+        "**Here are the " +
+          interaction.options.getInteger("size") +
+          " best secondaries for " +
+          player_main +
+          ", based on the " +
+          dataset_name +
+          " dataset:**",
+      );
 
       const separator = new SeparatorBuilder()
         .setDivider(false) // No line displayed
