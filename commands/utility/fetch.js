@@ -24,7 +24,7 @@ async function fetch_matchups() {
   let matchups_all = process_matchup_winrates(matchups_req.data.data_all);
   let matchups_vanq = process_matchup_winrates(matchups_req.data.data_vanq);
   fs.writeFile(
-    "./datasets/matchups_all.json",
+    "./datasets/matchups/matchups_all.json",
     JSON.stringify(matchups_all, null, "\t"),
     "utf8",
     (err) => {
@@ -36,7 +36,7 @@ async function fetch_matchups() {
     },
   );
   fs.writeFile(
-    "./datasets/matchups_vanq.json",
+    "./datasets/matchups/matchups_vanq.json",
     JSON.stringify(matchups_vanq, null, "\t"),
     "utf8",
     (err) => {
@@ -54,7 +54,7 @@ async function fetch_characters() {
   let chars_req = await axios.get("https://puddle.farm/api/characters");
   let chars = chars_req.data;
     fs.writeFile(
-    "./datasets/chars.json",
+    "./datasets/chars/chars.json",
     JSON.stringify(chars, null, "\t"),
     "utf8",
     (err) => {
