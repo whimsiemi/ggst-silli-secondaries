@@ -100,10 +100,20 @@ module.exports = {
           dataset_name = "chosen";
           break;
       }
+      let secs_grammar = "";
+      switch (char_secs.length) {
+        case 1:
+          secs_grammar = "**Here is the best secondary for ";
+          break;
+        default:
+          secs_grammar =
+            "**Here are the " +
+            interaction.options.getInteger("size") +
+            " best secondaries for ";
+          break;
+      }
       const secsHeaders = new TextDisplayBuilder().setContent(
-        "**Here are the " +
-          interaction.options.getInteger("size") +
-          " best secondaries for " +
+        secs_grammar +
           player_main +
           ", based on the " +
           dataset_name +
