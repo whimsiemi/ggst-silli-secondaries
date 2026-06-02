@@ -92,19 +92,22 @@ module.exports = {
       switch (interaction.options.getInteger("dataset")) {
         case 0:
           dataset_name = "All Matches (puddle-farm)";
+          break;
         case 1:
           dataset_name = "Vanquisher Matches (puddle-farm)";
+          break;
         default:
           dataset_name = "chosen";
+          break;
       }
       const secsHeaders = new TextDisplayBuilder().setContent(
         "**Here are the " +
           interaction.options.getInteger("size") +
-          " best secondaries for *" +
+          " best secondaries for " +
           player_main +
-          "*, based on the *" +
+          ", based on the " +
           dataset_name +
-          "* dataset:**",
+          " dataset:**",
       );
 
       const separator = new SeparatorBuilder()
