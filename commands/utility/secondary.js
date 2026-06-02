@@ -61,7 +61,9 @@ module.exports = {
       let player_main = "";
       let valid_char = false;
       for (let i in chars) {
-        if (chars[i][0] == interaction.options.getString("main").toUpperCase()) {
+        if (
+          chars[i][0] == interaction.options.getString("main").toUpperCase()
+        ) {
           player_main = chars[i][1];
           valid_char = true;
           break;
@@ -86,12 +88,23 @@ module.exports = {
           }
         }
       }
+      let dataset_name = "";
+      switch (interaction.options.getInteger("dataset")) {
+        case 0:
+          "**All Matches (puddle-farm)**";
+        case 1:
+          "**Vanquisher Matches (puddle-farm)**";
+        default:
+          "**chosen**";
+      }
       const secsHeaders = new TextDisplayBuilder().setContent(
         "**Here are the " +
           interaction.options.getInteger("size") +
-          " best secondaries for " +
+          " best secondaries for **" +
           player_main +
-          ", based on your dataset of choice:**",
+          "**, based on the " +
+          dataset_name +
+          " dataset:**",
       );
 
       const separator = new SeparatorBuilder()
