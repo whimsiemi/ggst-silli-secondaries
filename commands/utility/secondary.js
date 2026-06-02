@@ -61,7 +61,7 @@ module.exports = {
       let player_main = "";
       let valid_char = false;
       for (let i in chars) {
-        if (chars[i][0] == interaction.options.getString("main")) {
+        if (chars[i][0] == interaction.options.getString("main").toUpperCase()) {
           player_main = chars[i][1];
           valid_char = true;
           break;
@@ -75,7 +75,7 @@ module.exports = {
         return;
       }
       let char_secs = secondary_picker(
-        interaction.options.getString("main"),
+        interaction.options.getString("main").toUpperCase(),
         interaction.options.getInteger("dataset"),
       );
       for (let i in char_secs) {
