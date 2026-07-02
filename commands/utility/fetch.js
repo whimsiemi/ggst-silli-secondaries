@@ -19,6 +19,10 @@ function process_matchup_winrates(json) {
 
 // Parsing the latest matchup and character data from puddle-farm's API
 async function fetch_matchups() {
+  if (!fs.existsSync("./datasets/matchups")) {
+    fs.mkdirSync("./datasets");
+    fs.mkdirSync("./datasets/matchups");
+  }
   // NOTE: Once this goes live on a server, this will be replaced with a batch script ran every 24 hours to store these into JSON files
   let matchups_req = await axios.get("https://puddle.farm/api/matchups");
   let matchups_all = process_matchup_winrates(matchups_req.data.data_all);
@@ -51,9 +55,13 @@ async function fetch_matchups() {
 }
 
 async function fetch_characters() {
+  if (!fs.existsSync("./datasets/chars")) {
+    fs.mkdirSync("./datasets");
+    fs.mkdirSync("./datasets/chars");
+  }
   let chars_req = await axios.get("https://puddle.farm/api/characters");
   let chars = chars_req.data;
-    fs.writeFile(
+  fs.writeFile(
     "./datasets/chars/chars.json",
     JSON.stringify(chars, null, "\t"),
     "utf8",
