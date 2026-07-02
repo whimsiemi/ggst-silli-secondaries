@@ -50,7 +50,7 @@ module.exports = {
       option
         .setName("size")
         .setDescription(
-          "How long you want the list to be (max is the full character roster",
+          "How long you want the list to be (max is the full character roster)",
         )
         .setRequired(true)
         .setMinValue(1)
