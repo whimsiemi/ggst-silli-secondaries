@@ -82,15 +82,29 @@ module.exports = {
     .setDescription("Refreshes the puddle-farm API datasets! (ADMIN ONLY)"),
   async execute(interaction) {
     if (interaction.user.id != 1396445540115288144) {
-      await interaction.reply({content: "Stop right there, you criminal scum! You can't run that command!", flags: MessageFlags.Ephemeral});
+      await interaction.reply({
+        content:
+          "Stop right there, you criminal scum! You can't run that command!",
+        flags: MessageFlags.Ephemeral,
+      });
       return;
     }
     try {
       fetch_matchups();
       fetch_characters();
-      await interaction.reply({content: "Successfully refreshed the databases!", flags: MessageFlags.Ephemeral});
+      await interaction.reply({
+        content: "Successfully refreshed the databases! Restarting...",
+        flags: MessageFlags.Ephemeral,
+      });
+      setTimeout(function () {
+        interaction.client.destroy();
+        process.exit(0);
+      }, 3000);
     } catch (_err) {
-      await interaction.reply({content: "Oops! There was an error!", flags: MessageFlags.Ephemeral});
+      await interaction.reply({
+        content: "Oops! There was an error!",
+        flags: MessageFlags.Ephemeral,
+      });
     }
   },
 };
