@@ -3,6 +3,7 @@ const fs = require("fs");
 const matchups_all = require("./datasets/matchups/matchups_all.json");
 const matchups_vanq = require("./datasets/matchups/matchups_vanq.json");
 const chars = require("./datasets/chars/chars.json");
+const pop = require("./datasets/popularity/pop.json");
 
 // Calculate the bonus multiplication to a character's matchup score, relative to how necessary a good matchup is for the player character
 function get_matchup_bonus(matchup, mult) {
@@ -78,7 +79,7 @@ function secondary_picker(player, dataset) {
             get_matchup_bonus(
               search_char_matchup(player, chars[j][0], json),
               10,
-            ),
+            ) * (pop[1][j][1] / pop[3]),
         );
       }
     }

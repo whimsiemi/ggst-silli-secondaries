@@ -76,5 +76,28 @@ async function fetch_characters() {
   return chars;
 }
 
+async function fetch_popularity() {
+  if (!fs.existsSync("./datasets/popularity")) {
+    fs.mkdirSync("./datasets");
+    fs.mkdirSync("./datasets/popularity");
+  }
+  let pop_req = await axios.get("https://puddle.farm/ggst/api/characters");
+  let pop = chars_req.data;
+  fs.writeFile(
+    "./datasets/popularity/pop.json",
+    JSON.stringify(pop, null, "\t"),
+    "utf8",
+    (err) => {
+      if (err) {
+        console.error("Error writing file:", err);
+        return;
+      }
+      console.log("File written successfully!");
+    },
+  );
+  return pop;
+}
+
 fetch_matchups();
 fetch_characters();
+fetch_popularity();
