@@ -79,8 +79,8 @@ function secondary_picker(player, dataset) {
             get_matchup_bonus(
               search_char_matchup(player, chars[j][0], json),
               10,
-            ) *
-            ((pop.per_character[i].value / pop.per_character_total) * 0.3),
+            ) /**
+            ((pop.per_character[i].value / pop.per_character_total))*/,
         );
       }
     }
