@@ -73,7 +73,7 @@ function secondary_picker(player, dataset) {
         search_char_matchup(player, chars[j][0], json).winrate <= 0.5 &&
         search_char_matchup(secondaries[i][0], chars[j][0], json).winrate >= 0.5
       ) {
-        console.log(pop);
+        console.log(pop[1]);
         secondaries[i][2] += Math.floor(
           search_char_matchup(secondaries[i][0], chars[j][0], json).winrate *
             100 *
