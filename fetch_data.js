@@ -56,7 +56,6 @@ async function fetch_matchups() {
 
 async function fetch_characters() {
   if (!fs.existsSync("./datasets/chars")) {
-    fs.mkdirSync("./datasets");
     fs.mkdirSync("./datasets/chars");
   }
   let chars_req = await axios.get("https://puddle.farm/ggst/api/characters");
@@ -78,11 +77,10 @@ async function fetch_characters() {
 
 async function fetch_popularity() {
   if (!fs.existsSync("./datasets/popularity")) {
-    fs.mkdirSync("./datasets");
     fs.mkdirSync("./datasets/popularity");
   }
   let pop_req = await axios.get("https://puddle.farm/ggst/api/characters");
-  let pop = chars_req.data;
+  let pop = pop_req.data;
   fs.writeFile(
     "./datasets/popularity/pop.json",
     JSON.stringify(pop, null, "\t"),
