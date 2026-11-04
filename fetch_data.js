@@ -79,7 +79,7 @@ async function fetch_popularity() {
   if (!fs.existsSync("./datasets/popularity")) {
     fs.mkdirSync("./datasets/popularity");
   }
-  let pop_req = await axios.get("https://puddle.farm/ggst/api/characters");
+  let pop_req = await axios.get("https://puddle.farm/ggst/api/popularity");
   let pop = pop_req.data;
   fs.writeFile(
     "./datasets/popularity/pop.json",
