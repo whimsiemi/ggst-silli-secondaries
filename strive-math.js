@@ -80,7 +80,7 @@ function secondary_picker(player, dataset) {
               search_char_matchup(player, chars[j][0], json),
               10,
             ) *
-            (pop.per_character[j].value / pop.per_character_total),
+            (pop.per_character_total / pop.per_character[j].value),
         );
       }
     }
